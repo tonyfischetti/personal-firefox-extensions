@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "Spanish Translation Utilities",
+  "version": "1.0",
+
+  "description": "Adds a right-click menu to translate selected text using Google Translate, Spanish Dict, or Lingee",
+
+  "developer": {
+    "name": "Tony Fischetti",
+    "url": "tonyfischetti.com"
+  },
+
+  "permissions": [
+    "menus"
+  ],
+
+  "icons": {
+    "48": "icons/small-ñ.png",
+    "96": "icons/big-ñ.png"
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
