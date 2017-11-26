@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "Remove Annoying Content",
+  "version": "1.0",
+
+  "description": "Collection of rules and short scripts to remove web contents that annoy me personally",
+
+  "developer": {
+    "name": "Tony Fischetti",
+    "url": "tonyfischetti.com"
+  },
+
+  "icons": {
+    "48": "icons/small-tear.png",
+    "96": "icons/big-tear.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.facebook.com/*"],
+      "js": ["remove-facebook-sidebar.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://mobile.twitter.com/*"],
+      "js": ["remove-mobile-twitter-header.js"]
+    }
+  ]
+}
