@@ -11,28 +11,22 @@
   },
 
   "permissions": [
-      "menus"
+      "menus",
+      "activeTab",
+      "tabs"
   ],
 
   "icons": {
-    "48": "icons/small-tear.png",
-    "96": "icons/big-tear.png"
+    "48": "icons/small.png",
+    "96": "icons/big.png"
   },
 
-  "content_scripts": [
-    {
-      "matches": ["https://www.facebook.com/*"],
-      "js": ["remove-facebook-sidebar.js"],
-      "run_at": "document_end"
-    },
-    {
-      "matches": ["https://*.wikipedia.org/wiki/*"],
-      "js": ["remove-wiki-sidebar.js"],
-      "run_at": "document_end"
-    },
-    {
-      "matches": ["https://mobile.twitter.com/*"],
-      "js": ["remove-mobile-twitter-header.js"]
-    }
-  ]
+  "browser_action": {
+    "default_icon": "icons/small.png"
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  }
+
 }
