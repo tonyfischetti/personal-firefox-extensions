@@ -10,6 +10,10 @@
     "url": "tonyfischetti.com"
   },
 
+  "permissions": [
+      "menus"
+  ],
+
   "icons": {
     "48": "icons/small-tear.png",
     "96": "icons/big-tear.png"
@@ -19,6 +23,11 @@
     {
       "matches": ["https://www.facebook.com/*"],
       "js": ["remove-facebook-sidebar.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://*.wikipedia.org/wiki/*"],
+      "js": ["remove-wiki-sidebar.js"],
       "run_at": "document_end"
     },
     {
