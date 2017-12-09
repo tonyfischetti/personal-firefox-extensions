@@ -15,8 +15,12 @@
   ],
 
   "icons": {
-    "48": "icons/small-ñ.png",
-    "96": "icons/big-ñ.png"
+    "48": "icons/small.png",
+    "96": "icons/big.png"
+  },
+
+  "browser_action": {
+    "default_icon": "icons/small.png"
   },
 
   "background": {
