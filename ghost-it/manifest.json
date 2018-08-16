@@ -1,0 +1,41 @@
+{
+  "manifest_version": 2,
+  "name": "Ghost It",
+  "version": "1.0",
+
+  "description": "Easily make unwanted web elements invisible",
+
+  "developer": {
+    "name": "Tony Fischetti",
+    "url": "tonyfischetti.com"
+  },
+
+  "permissions": [
+    "menus",
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "<all_urls>"
+  ],
+
+  "icons": {
+    "48": "icons/small.png",
+    "96": "icons/big.png"
+  },
+
+  "browser_action": {
+    "default_icon": "icons/small.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": ["background.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }]
+}
