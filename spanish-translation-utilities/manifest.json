@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Spanish Translation Utilities",
-  "version": "1.0",
+  "version": "1.1",
 
   "description": "Adds a right-click menu to translate selected spanish text using Google Translate, Spanish Dict, or Lingee",
 

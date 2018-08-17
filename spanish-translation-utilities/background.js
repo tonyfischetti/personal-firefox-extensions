@@ -39,17 +39,17 @@ browser.menus.onClicked.addListener(function(info, tab) {
   var the_text = encodeURI(the_text_raw);
   if (info.menuItemId == "translate-selection-google") {
     var the_url = make_google_url(the_text);
-    browser.windows.create({url: the_url});
+    browser.tabs.create({url: the_url});
   }
   if (info.menuItemId == "translate-selection-spanish-dict") {
     var the_text = info.selectionText;
     var the_url = make_spanish_dict_url(the_text);
-    browser.windows.create({url: the_url});
+    browser.tabs.create({url: the_url});
   }
   if (info.menuItemId == "translate-selection-lingee") {
     var the_text = info.selectionText;
     var the_url = make_lingee_url(the_text);
-    browser.windows.create({url: the_url});
+    browser.tabs.create({url: the_url});
   }
 });
 
