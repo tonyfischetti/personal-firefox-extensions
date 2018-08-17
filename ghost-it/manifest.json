@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Ghost It",
-  "version": "1.5",
+  "version": "1.7",
 
   "description": "Easily make unwanted web elements invisible",
 
@@ -34,7 +34,7 @@
         "https://*/*",
         "file://*/*"
       ],
-      "js": ["background.js"],
+      "js": ["ghost-it.js"],
       "run_at": "document_start",
       "all_frames": true
     }]
