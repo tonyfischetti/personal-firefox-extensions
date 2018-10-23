@@ -41,7 +41,7 @@
 
   "applications": {
       "gecko": {
-          "id": "ghost-it@tonyfischettiart.com",
+          "id": "{c0c566e4-e811-4b3a-822b-27b03bc5dd1f}",
           "strict_min_version": "57.0a1"
       }
   },
