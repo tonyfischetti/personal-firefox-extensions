@@ -1,12 +1,8 @@
 
-
-
 var GODEEPER = "≠";
 var UNDO = "u";
 var STARTKEY = "Alt";
 var DESTROYELEMENT = "Shift";
-
-
 
 var thecurrentelement = "";
 var overthiselement = "";
@@ -46,12 +42,11 @@ window.addEventListener('click', function (e) {
 
 
 window.addEventListener('keydown', function(event) {
-  console.log(event.key);
-  console.log("\nreddened elements are now:");
-  console.log(reddenedElements);
-  console.log("how deep");
-  console.log(howDeep);
-  console.log("\n");
+  // console.log("\nreddened elements are now:");
+  // console.log(reddenedElements);
+  // console.log("how deep");
+  // console.log(howDeep);
+  // console.log("\n");
   if(event.key===GODEEPER){
     if(triggerKeyIsPressed){
       howDeep = howDeep + 1;
@@ -60,11 +55,11 @@ window.addEventListener('keydown', function(event) {
       reddenedOldColors.push(oldBackgroundColor);
       reddenedElements.push(overthiselement);
       overthiselement.style.backgroundColor = "red";
-      console.log("NOW... reddened elements are:");
-      console.log(reddenedElements);
-      console.log("and we are this many deep");
-      console.log(howDeep);
-      console.log("\n");
+      // console.log("NOW... reddened elements are:");
+      // console.log(reddenedElements);
+      // console.log("and we are this many deep");
+      // console.log(howDeep);
+      // console.log("\n");
     }
   }
   if(event.key===STARTKEY){
