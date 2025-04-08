@@ -1,93 +1,86 @@
 
-var GODEEPER = "≠";
-var UNDO = "u";
-var STARTKEY = "Alt";
-var DESTROYELEMENT = "Shift";
+const lowOpacity = 0.3;
 
-var thecurrentelement = "";
-var overthiselement = "";
-var overtheseelements = [];
-var ghostedElements = [];
-var howDeep = 1;
-var reddenedOldColors = [];
-var reddenedElements = [];
+let KEY_STARTKEY = "Alt";
+let KEY_DEEPER = "≠";
+let KEY_UNDO = "u";
 
-var triggerKeyIsPressed = false;
+let theCurrentElement;
+let overThisElement;
+let overTheseElements;
+let ghostedElements = [];
+let howDeep = 1;
 
+// tuple holding element and old background color
+let reddenedElements = [];
 
-var getfromstorage = browser.storage.local.get("ghostitinhotkey");
-getfromstorage.then((res) => {
-  console.log("Ghost It registered hotkey of:");
-  console.log(res.ghostitinhotkey);
-  STARTKEY = res.ghostitinhotkey;
-});
-var getfromstorage = browser.storage.local.get("ghostitinhotkeydeeper");
-getfromstorage.then((res) => {
-  console.log("Ghost It registered deeper hotkey of:");
-  console.log(res.ghostitinhotkeydeeper);
-  GODEEPER = res.ghostitinhotkeydeeper;
-});
+let triggerKeyIsPressed = false;
 
 
-window.addEventListener('click', function (e) {
-  if(triggerKeyIsPressed){
-    for(i = 0; i < reddenedElements.length; i++){
-      var oldEl  = reddenedElements[i];
-      var oldCol = reddenedOldColors[i];
-      oldEl.style.visibility = "hidden";
-      ghostedElements.push(oldEl);
-    }
+browser.storage.local.get("ghostit_hotkey").
+  then(res => {
+    console.log("Ghost It registered hotkey of:");
+    console.log(res.ghostit_hotkey);
+    KEY_STARTKEY = res.ghostit_hotkey ?? KEY_STARTKEY;
+  }).
+  then(() => browser.storage.local.get("ghostit_deeper")).
+  then(res => {
+    console.log("Ghost It registered deeper hotkey of:");
+    console.log(res.ghostit_deeper);
+    KEY_DEEPER = res.ghostit_deeper ?? KEY_DEEPER;
+  }).
+  then(() => browser.storage.local.get("ghostit_undo")).
+  then(res => {
+    console.log("Ghost It registered an undo hotkey of:");
+    console.log(res.ghostit_undo);
+    KEY_UNDO = res.ghostit_undo ?? KEY_UNDO;
+  });
+
+
+window.addEventListener('click', e => {
+  if (triggerKeyIsPressed) {
+    reddenedElements.map(([i]) => {
+      i.style.visibility = 'hidden';
+      ghostedElements.push(i);
+    });
+    e.preventDefault();
+    e.stopImmediatePropagation();
   }
 }, false);
 
 
 window.addEventListener('keydown', function(event) {
-  // console.log("\nreddened elements are now:");
-  // console.log(reddenedElements);
-  // console.log("how deep");
-  // console.log(howDeep);
-  // console.log("\n");
-  if(event.key===GODEEPER){
-    if(triggerKeyIsPressed){
-      howDeep = howDeep + 1;
-      overthiselement = overtheseelements[overtheseelements.length-howDeep];
-      var oldBackgroundColor = overthiselement.style.backgroundColor;
-      reddenedOldColors.push(oldBackgroundColor);
-      reddenedElements.push(overthiselement);
-      overthiselement.style.backgroundColor = "red";
-      // console.log("NOW... reddened elements are:");
-      // console.log(reddenedElements);
-      // console.log("and we are this many deep");
-      // console.log(howDeep);
-      // console.log("\n");
+  if (event.key===KEY_DEEPER) {
+    if (triggerKeyIsPressed) {
+      howDeep++;
+      overThisElement = overTheseElements[overTheseElements.length-howDeep];
+      reddenedElements.push([overThisElement,
+                             overThisElement.style.backgroundColor]);
+      overThisElement.style.backgroundColor = "red";
     }
   }
-  if(event.key===STARTKEY){
+  if (event.key===KEY_STARTKEY) {
     triggerKeyIsPressed = true;
-    overtheseelements = document.querySelectorAll(":hover");
-    overthiselement = overtheseelements[overtheseelements.length-howDeep];
-    var oldBackgroundColor = overthiselement.style.backgroundColor;
-    reddenedOldColors.push(oldBackgroundColor);
-    reddenedElements.push(overthiselement);
-    overthiselement.style.backgroundColor = "red";
+    overTheseElements = document.querySelectorAll(":hover");
+    overThisElement = overTheseElements[overTheseElements.length-howDeep];
+    reddenedElements.push([overThisElement,
+                           overThisElement.style.backgroundColor]);
+    overThisElement.style.backgroundColor = "red";
   }
 });
 
 window.addEventListener('keyup', function(event) {
-  if(event.key===STARTKEY){
+  if (event.key===KEY_STARTKEY) {
     triggerKeyIsPressed = false;
-    for(i = 0; i < reddenedElements.length; i++){
-      var oldEl  = reddenedElements[i];
-      var oldCol = reddenedOldColors[i];
-      oldEl.style.backgroundColor = oldCol;
-    }
-    // overthiselement.style.backgroundColor = oldBackgroundColor;
-    reddenedOldColors = [];
+    console.log(`reddened elements: ${reddenedElements}`);
+    reddenedElements.map(([el, oldColor]) => {
+      el.style.backgroundColor = oldColor;
+    });
     reddenedElements = [];
     howDeep = 1;
   }
-  if(event.key===UNDO){
-    var tmp = ghostedElements.pop()
+  if (event.key===KEY_UNDO) {
+    const tmp = ghostedElements.pop()
     tmp.style.visibility = "visible";
   }
 });
