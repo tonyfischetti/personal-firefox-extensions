@@ -10,3 +10,8 @@ header in mobile twitter that takes up a lot of space
 or phrase it offers the option of sending that text to google translate,
 SpanishDict, or Lingee for translation. I hope to add functionality to
 store the word in local storage so you can make flashcards for them later
+
+I use `web-ext` to develop these.
+
+See [this link](https://extensionworkshop.com/extension-basics/) for more
+firefox extension development documentation
